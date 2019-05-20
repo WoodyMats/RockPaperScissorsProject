@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     
     private String playerChoise, cpuChoise;
 
+    private int player_score=0,cpu_score=0;
+
     private Random random = new Random();
 
     @Override
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 makeMove();
             }
         });
+
     }
 
     private void makeMove() {
@@ -76,16 +79,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(playerChoise.equals("rock") && cpuChoise.equals("scissors")){
+            player_score++;
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
         } else if(playerChoise.equals("rock") && cpuChoise.equals("paper")){
+            cpu_score++;
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
         } else if(playerChoise.equals("paper") && cpuChoise.equals("rock")){
+            player_score++;
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
         } else if(playerChoise.equals("paper") && cpuChoise.equals("scissors")){
+            cpu_score++;
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
         } else if(playerChoise.equals("scissors") && cpuChoise.equals("rock")){
+            cpu_score++;
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
         } else if(playerChoise.equals("scissors") && cpuChoise.equals("paper")){
+            player_score++;
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show();
