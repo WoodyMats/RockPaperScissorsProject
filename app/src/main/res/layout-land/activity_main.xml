@@ -81,10 +81,10 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/rock"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.168" />
 
     <TextView
         android:id="@+id/cpuScore"
@@ -99,9 +99,9 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/scissors"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.158" />
 
 </android.support.constraint.ConstraintLayout>

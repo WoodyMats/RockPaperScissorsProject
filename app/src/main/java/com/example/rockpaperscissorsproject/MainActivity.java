@@ -1,7 +1,5 @@
 package com.example.rockpaperscissorsproject;
 
-import android.os.PersistableBundle;
-import android.service.autofill.TextValueSanitizer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button rock, paper, scissors;
 
-    private Bundle bundle = new Bundle();
-
     private ImageView playerIcon, cpuIcon;
     
-    private String playerChoise, cpuChoise;
+    private String playerChoice, cpuChoice;
 
     private TextView cpuScore, playerScore;
 
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         rock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerChoise = "rock";
+                playerChoice = "rock";
                 playerIcon.setImageResource(R.drawable.rock);
                 makeMove();
             }
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         paper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerChoise = "paper";
+                playerChoice = "paper";
                 playerIcon.setImageResource(R.drawable.paper);
                 makeMove();
             }
@@ -66,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         scissors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerChoise = "scissors";
+                playerChoice = "scissors";
                 playerIcon.setImageResource(R.drawable.scissors);
                 makeMove();
             }
@@ -75,8 +71,34 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             cpu_score = savedInstanceState.getInt("machineScore");
             player_score = savedInstanceState.getInt("humanScore");
-            playerScore.setText("Player: " + player_score);
-            cpuScore.setText("Machine: " + cpu_score);
+
+            playerChoice = savedInstanceState.getString("humanChoice");
+            cpuChoice = savedInstanceState.getString("machineChoice");
+
+            if(playerChoice != null && cpuChoice != null) {
+                playerScore.setText("Player: " + player_score + " (Played: " + playerChoice + ")");
+                cpuScore.setText("Machine: " + cpu_score + " (Played: " + cpuChoice + ")");
+
+                if(playerChoice.equals("rock")){
+                    playerIcon.setImageResource(R.drawable.rock);
+                } else if(playerChoice.equals("paper")){
+                    playerIcon.setImageResource(R.drawable.paper);
+                } else {
+                    playerIcon.setImageResource(R.drawable.scissors);
+                }
+
+                if(cpuChoice.equals("rock")){
+                    cpuIcon.setImageResource(R.drawable.rock);
+                } else if(cpuChoice.equals("paper")){
+                    cpuIcon.setImageResource(R.drawable.paper);
+                } else {
+                    cpuIcon.setImageResource(R.drawable.scissors);
+                }
+            } else {
+                playerScore.setText("Player: " + player_score);
+                cpuScore.setText("Machine: " + cpu_score);
+            }
+
         }
 
     }
@@ -85,37 +107,45 @@ public class MainActivity extends AppCompatActivity {
         int randomChoose = random.nextInt(500)%3;
 
         if(randomChoose == 0){
-            cpuChoise = "rock";
+            cpuChoice = "rock";
             cpuIcon.setImageResource(R.drawable.rock);
         } else if(randomChoose == 1){
-            cpuChoise = "paper";
+            cpuChoice = "paper";
             cpuIcon.setImageResource(R.drawable.paper);
 
         } else if(randomChoose == 2){
-            cpuChoise = "scissors";
+            cpuChoice = "scissors";
             cpuIcon.setImageResource(R.drawable.scissors);
         }
 
 
-        if(playerChoise.equals("rock") && cpuChoise.equals("scissors")){
-            playerScore.setText("Player: " + ++player_score);
+        if(playerChoice.equals("rock") && cpuChoice.equals("scissors")){
+            playerScore.setText("Player: " + ++player_score + " (Played: " + playerChoice + ")");
+            cpuScore.setText("Machine: " + cpu_score + " (Played: " + cpuChoice + ")");
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
-        } else if(playerChoise.equals("rock") && cpuChoise.equals("paper")){
-            cpuScore.setText("Machine: " + ++cpu_score);
+        } else if(playerChoice.equals("rock") && cpuChoice.equals("paper")){
+            cpuScore.setText("Machine: " + ++cpu_score + " (Played: " + cpuChoice + ")");
+            playerScore.setText("Player: " + player_score + " (Played: " + playerChoice + ")");
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
-        } else if(playerChoise.equals("paper") && cpuChoise.equals("rock")){
-            playerScore.setText("Player: " + ++player_score);
+        } else if(playerChoice.equals("paper") && cpuChoice.equals("rock")){
+            playerScore.setText("Player: " + ++player_score + " (Played: " + playerChoice + ")");
+            cpuScore.setText("Machine: " + cpu_score + " (Played: " + cpuChoice + ")");
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
-        } else if(playerChoise.equals("paper") && cpuChoise.equals("scissors")){
-            cpuScore.setText("Machine: " + ++cpu_score);
+        } else if(playerChoice.equals("paper") && cpuChoice.equals("scissors")){
+            cpuScore.setText("Machine: " + ++cpu_score + " (Played: " + cpuChoice + ")");
+            playerScore.setText("Player: " + player_score + " (Played: " + playerChoice + ")");
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
-        } else if(playerChoise.equals("scissors") && cpuChoise.equals("rock")){
-            cpuScore.setText("Machine: " + ++cpu_score);
+        } else if(playerChoice.equals("scissors") && cpuChoice.equals("rock")){
+            cpuScore.setText("Machine: " + ++cpu_score + " (Played: " + cpuChoice + ")");
+            playerScore.setText("Player: " + player_score + " (Played: " + playerChoice + ")");
             Toast.makeText(this, "You Lost!", Toast.LENGTH_SHORT).show();
-        } else if(playerChoise.equals("scissors") && cpuChoise.equals("paper")){
-            playerScore.setText("Player: " + ++player_score);
+        } else if(playerChoice.equals("scissors") && cpuChoice.equals("paper")){
+            playerScore.setText("Player: " + ++player_score + " (Played: " + playerChoice + ")");
+            cpuScore.setText("Machine: " + cpu_score + " (Played: " + cpuChoice + ")");
             Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
         } else {
+            playerScore.setText("Player: " + player_score + " (Played: " + playerChoice + ")");
+            cpuScore.setText("Machine: " + cpu_score + " (Played: " + cpuChoice + ")");
             Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show();
         }
     }
@@ -126,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
         outState.putInt("humanScore", player_score);
         outState.putInt("machineScore", cpu_score);
-        bundle.putAll(outState);
+        outState.putString("humanChoice", playerChoice);
+        outState.putString("machineChoice", cpuChoice);
 
     }
 }
