@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Variables Decleration
     private Button rock, paper, scissors;
 
     private ImageView playerIcon, cpuIcon;
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         playerIcon = findViewById(R.id.myMove);
         cpuIcon = findViewById(R.id.cpuMove);
-
+        
+        //Connect the variables with the widgets in XML file by reference their id
         playerScore = findViewById(R.id.playerScore);
         playerScore.setText("Player: " + player_score);
         cpuScore = findViewById(R.id.cpuScore);
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         paper = findViewById(R.id.paper);
         scissors = findViewById(R.id.scissors);
 
+        
+        //Set Listeners to buttons
         rock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //if activity changed set the variables from outstate to the new activity
         if(savedInstanceState != null){
             cpu_score = savedInstanceState.getInt("machineScore");
             player_score = savedInstanceState.getInt("humanScore");
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Choose a random move for the bot, then checks who win and display the equivalent message and updates the score
     private void makeMove() {
         int randomChoose = random.nextInt(500)%3;
 
@@ -150,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Save the variables and if activity changed.
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
